@@ -1,0 +1,4 @@
+calculateScore-lambda:
+  handler: workflows/scan-cv-workflow/calculate-score/handler.handle
+  environment:
+    S3_INPUT_BUCKET_NAME: ${self:custom.inputBucketName}

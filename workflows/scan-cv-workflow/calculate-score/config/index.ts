@@ -1,17 +1,17 @@
 import Joi from "joi";
 import { pipeline } from "ts-pipe-compose";
 
-export interface CheckNodeExperienceLambdaEnvironmentVariables {
-  extractedFilesBucketName: string;
+interface CalculateScoreLambdaEnvironmentVariables {
+  inputBucketName: string;
 }
 
 const loadEnvs = (env: NodeJS.ProcessEnv) => ({
-  extractedFilesBucketName: env.S3_EXTRACTED_FILES_BUCKET_NAME,
+  inputBucketName: env.S3_INPUT_BUCKET_NAME,
 });
 
-const validateConfig = (config: ReturnType<typeof loadEnvs>): CheckNodeExperienceLambdaEnvironmentVariables => {
+const validateConfig = (config: ReturnType<typeof loadEnvs>): CalculateScoreLambdaEnvironmentVariables => {
   const schema = Joi.object().keys({
-    extractedFilesBucketName: Joi.string().required(),
+    inputBucketName: Joi.string().required(),
   });
 
   const { error, value } = schema.validate(config);

@@ -1,0 +1,4 @@
+checkExcludeList-lambda:
+  handler: workflows/scan-cv-workflow/check-exclude-list/handler.handle
+  environment:
+      S3_EXTRACTED_FILES_BUCKET_NAME: ${self:custom.extractedFilesBucketName}
