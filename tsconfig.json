@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "preserveConstEnums": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "target": "es2015",
+    "module": "commonjs",
+    "outDir": ".build",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "lib": ["es2015", "es2020.string", "ES2020.Promise"],
+    "typeRoots": ["./node_modules/@types", "./shared/typings"],
+    "downlevelIteration": true,
+    "rootDir": "./",
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  },
+  "ts-node": {
+    "files": true
+  }
+}

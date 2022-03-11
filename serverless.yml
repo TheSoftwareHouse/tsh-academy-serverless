@@ -1,0 +1,94 @@
+service: ${env:APP_NAME, 'tshAcademySlsWorkshops'}${env:STUDENT_NAME, 'student01'}
+useDotenv: true
+plugins:
+  - serverless-step-functions-local
+  - serverless-step-functions
+  - serverless-webpack
+  - serverless-offline
+  - serverless-plugin-log-retention
+
+package:
+  individually: true
+
+custom:
+  accountId: ${env:ACCOUNT_ID}
+  studentId: ${env:STUDENT_NAME, 'student01'}
+  logRetentionInDays: 30
+  webpack:
+    webpackConfig: "webpack.config.js"
+    packager: "npm"
+  stepFunctionsLocal:
+    accountId: ${env:ACCOUNT_ID}
+    region: us-east-1
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: ${env:AWS_LAMBDAS_REGION, 'eu-west-1'}
+  stage: ${opt:stage, 'dev'}
+  memorySize: 256
+  timeout: 30
+  environment:
+    APP_NAME: ${env:APP_NAME, 'tshAcademySlsWorkshops'}
+    AWS_LAMBDAS_REGION: ${env:AWS_LAMBDAS_REGION, 'eu-west-1'}
+    STUDENT_NAME: ${env:STUDENT_NAME, 'student01'}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+        - states:StartExecution
+      Resource:
+        - "*"
+    - Effect: Allow
+      Action:
+        - s3:GetObject
+        - s3:PutObject
+        - sns:Publish
+        - sns:Subscribe
+      Resource:
+        - "*"
+
+functions:
+  - ${file(functions/scan-file/function.yml)}
+  - ${file(workflows/scan-cv-workflow/copy-file/function.yml)}
+  - ${file(workflows/scan-cv-workflow/check-node-experience/function.yml)}
+  - ${file(workflows/scan-cv-workflow/check-it-experience/function.yml)}
+  - ${file(workflows/scan-cv-workflow/check-cloud-experience/function.yml)}
+  - ${file(workflows/scan-cv-workflow/check-exclude-lists/function.yml)}
+  - ${file(workflows/scan-cv-workflow/calculate-score/function.yml)}
+  - ${file(workflows/scan-cv-workflow/extract-text/function.yml)}
+  # PLOP_ADD_LAMBDA
+
+stepFunctions:
+  stateMachines:
+    ScanCvWorkflow: ${file(workflows/scan-cv-workflow/workflow.yml)}
+  # PLOP_ADD_WORKFLOW_STATE_MACHINE
+
+resources:
+  Outputs:
+    ScanCvWorkflowStateMachine:
+      Description: Scan CV workflow state machine Arn
+      Value:
+        Ref: ScanCvWorkflow${self:service}${opt:stage, 'dev'}
+    # PLOP_ADD_WORKFLOW_RESOURCE
+  Resources:
+    scanSnsTopic:
+      Type: AWS::SNS::Topic
+      Properties:
+        TopicName: ${self:service}ScanFailedTopic
+    inputBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: tsh-academy-serverless-workshops-input-bucket-${env:STUDENT_NAME, 'student1'}
+    extractedFilesBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: tsh-academy-serverless-workshops-extracted-files-${env:STUDENT_NAME, 'student1'}
+    matchedFilesBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: tsh-academy-serverless-workshops-matched-files-${env:STUDENT_NAME, 'student1'}
+    rejectedFilesBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: tsh-academy-serverless-workshops-rejected-files-${env:STUDENT_NAME, 'student1'}
+    ScanCvWorkflowStateMachineRole: ${file(workflows/scan-cv-workflow/workflow.iam.yml)}

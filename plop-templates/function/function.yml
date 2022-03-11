@@ -1,0 +1,3 @@
+{{name}}:
+  handler: functions/{{name}}/handler.handle
+  events:

@@ -1,0 +1,4 @@
+name: ScanCvWorkflow${self:service}${opt:stage, 'dev'}
+definition: ${file(./workflows/scan-cv-workflow/workflow.asl.yml)}
+role:
+  Fn::GetAtt: ["ScanCvWorkflowStateMachineRole", "Arn"]
