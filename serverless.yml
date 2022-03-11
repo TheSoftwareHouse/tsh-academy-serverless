@@ -22,6 +22,8 @@ custom:
     region: us-east-1
   inputBucketName: tsh-academy-serverless-workshops-input-bucket-${env:STUDENT_NAME, 'student1'}
   extractedFilesBucketName: tsh-academy-serverless-workshops-extracted-files-${env:STUDENT_NAME, 'student1'}
+  matchedFilesBucketName: tsh-academy-serverless-workshops-matched-files-${env:STUDENT_NAME, 'student1'}
+  rejectedFilesBucketName: tsh-academy-serverless-workshops-rejected-files-${env:STUDENT_NAME, 'student1'}
 provider:
   name: aws
   runtime: nodejs14.x
@@ -85,4 +87,12 @@ resources:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: ${self:custom.extractedFilesBucketName}
+    matchedFilesBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.matchedFilesBucketName}
+    rejectedFilesBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.rejectedFilesBucketName}
     ScanCvWorkflowStateMachineRole: ${file(workflows/scan-cv-workflow/workflow.iam.yml)}

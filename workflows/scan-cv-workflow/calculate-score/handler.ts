@@ -1,5 +1,5 @@
 import { Context } from "aws-lambda";
-import { ScanCvEvent } from "../types";
+import { ScanCvEvent, ScanCvScoreEvent } from "../types";
 import { winstonLogger as logger } from "../../../shared/logger";
 import { createConfig } from "./config";
 
@@ -28,6 +28,8 @@ export const handle = async (event: ScanCvEvent[], _context: Context) => {
     extension: singleEvent.extension,
     calculatedScore: calculateScore(singleEvent),
     copySource: `${config.inputBucketName}/${singleEvent.key}`,
+    matchedFilesBucketName: config.matchedFilesBucketName,
+    rejectedFilesBucketName: config.rejectedFilesBucketName,
   };
 
   logger.info(`Score has been calculated for ${singleEvent.key}`);
