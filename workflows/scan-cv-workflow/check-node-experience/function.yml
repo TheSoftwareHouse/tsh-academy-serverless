@@ -1,0 +1,4 @@
+checkNodeExperience-lambda:
+  handler: workflows/scan-cv-workflow/check-node-experience/handler.handle
+  environment:
+      S3_EXTRACTED_FILES_BUCKET_NAME: ${self:custom.extractedFilesBucketName}
