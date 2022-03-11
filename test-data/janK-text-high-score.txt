@@ -1,0 +1,14 @@
+Imię: Jan
+Nazwisko: Kowalski
+Data urodzenia: 01-01-1992
+Miejsce zamieszkania: Gliwice
+
+Doświadczenie:
+
+Firma 1
+01-01-2010 - 01-01-2014
+Technologie i narzędzia: Node.js, Javascript, AWS, Terraform, Jest, PostgreSQL, Github, Docker, Google Cloud
+
+Firma 2
+01-01-2014 - 01-01-2016
+Technologie i narzędzia: Node.js, Javascript, Typescript, Azure, AWS StepFunctions, Mocha, Chai, Cypress, MySQL, MongoDB, Gitlab, Kubernetes, Ansible

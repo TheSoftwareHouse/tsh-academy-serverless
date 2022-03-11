@@ -1,0 +1,10 @@
+scan-file:
+  handler: functions/scan-file/handler.handle
+  environment:
+    SNS_SCAN_FAILED_TOPIC_ARN: arn:aws:sns:${opt:region, self:provider.region}:${self:custom.accountId}:${self:service}ScanFailedTopic
+    STATE_MACHINE_ARN: ${self:resources.Outputs.ScanCvWorkflowStateMachine.Value}
+  events:
+    - s3:
+        bucket: ${self:custom.inputBucketName}
+        event: s3:ObjectCreated:*
+        existing: true

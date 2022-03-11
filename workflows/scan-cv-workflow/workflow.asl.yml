@@ -1,0 +1,11 @@
+Comment: "Scan user CV document for data"
+StartAt: exampleStep
+States:
+  exampleStep:
+    Type: Task
+    Resource: !GetAtt example-lambda.Arn
+    TimeoutSeconds: 28
+    End: true
+  # PLOP_ADD_WORKFLOW_STEP
+
+

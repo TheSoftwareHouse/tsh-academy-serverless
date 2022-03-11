@@ -1,0 +1,27 @@
+Type: AWS::IAM::Role
+Properties:
+  RoleName: ${self:service}ScanCvExecutionRole-${self:custom.studentId}
+  AssumeRolePolicyDocument:
+    Statement:
+      - Effect: Allow
+        Principal:
+          Service:
+            - states.amazonaws.com
+        Action:
+          - sts:AssumeRole
+  Policies:
+    - PolicyName: statePolicy
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Action:
+              - s3:*
+            Resource:
+              - "*"
+            Effect: Allow
+          - Action:
+              - lambda:InvokeFunction
+            Resource:
+              - arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-example-lambda
+              - arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-example-lambda:*
+            Effect: Allow
