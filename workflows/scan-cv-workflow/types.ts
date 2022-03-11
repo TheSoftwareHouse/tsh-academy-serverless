@@ -9,4 +9,8 @@ export interface ScanCvEvent {
 
 export interface ScanCvScoreEvent {
   calculatedScore: number;
+  key: string;
+  copySource: string;
+  matchedFilesBucketName: string;
+  rejectedFilesBucketName: string;
 }

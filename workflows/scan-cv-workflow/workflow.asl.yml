@@ -34,7 +34,6 @@ States:
     Next: checkExperience
   checkExperience:
     Type: Parallel
-    End: true
     Branches:
       - StartAt: checkNodeExperience
         States:
@@ -60,3 +59,35 @@ States:
             Type: Task
             Resource: !GetAtt checkExcludeLists-lambda.Arn
             End: true
+    Next: calculateScore
+  calculateScore:
+    Type: Task
+    Resource: !GetAtt calculateScore-lambda.Arn
+    TimeoutSeconds: 28
+    Next: checkScore
+  checkScore:
+    Type: Choice
+    Choices:
+      - Variable: $.calculatedScore
+        NumericGreaterThan: 100
+        Comment: Is a match?
+        Next: saveToMatchedBucket
+    Default: saveToRejectedBucket
+  saveToMatchedBucket:
+    Type: Task
+    Resource: arn:aws:states:::aws-sdk:s3:copyObject
+    Parameters:
+      Bucket.$: $.matchedFilesBucketName
+      CopySource.$: $.copySource
+      Key.$: $.key
+    TimeoutSeconds: 28
+    End: true
+  saveToRejectedBucket:
+    Type: Task
+    Resource: arn:aws:states:::aws-sdk:s3:copyObject
+    Parameters:
+      Bucket.$: $.rejectedFilesBucketName
+      CopySource.$: $.copySource
+      Key.$: $.key
+    TimeoutSeconds: 28
+    End: true
