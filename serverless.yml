@@ -21,6 +21,7 @@ custom:
     accountId: ${env:ACCOUNT_ID}
     region: us-east-1
   inputBucketName: tsh-academy-serverless-workshops-input-bucket-${env:STUDENT_NAME, 'student00'}
+  extractedFilesBucketName: tsh-academy-serverless-workshops-extracted-files-${env:STUDENT_NAME, 'student00'}
 provider:
   name: aws
   runtime: nodejs14.x
@@ -50,7 +51,8 @@ provider:
 
 functions:
   - ${file(functions/scan-file/function.yml)}
-  - ${file(workflows/scan-cv-workflow/example-lambda/function.yml)}
+  - ${file(workflows/scan-cv-workflow/copy-file/function.yml)}
+  - ${file(workflows/scan-cv-workflow/extract-text/function.yml)}
 
 stepFunctions:
   stateMachines:
@@ -71,4 +73,8 @@ resources:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: ${self:custom.inputBucketName}
+    extractedFilesBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.extractedFilesBucketName}
     ScanCvWorkflowStateMachineRole: ${file(workflows/scan-cv-workflow/workflow.iam.yml)}

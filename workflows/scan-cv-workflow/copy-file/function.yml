@@ -1,0 +1,5 @@
+copyFile-lambda:
+  handler: workflows/scan-cv-workflow/copy-file/handler.handle
+  environment:
+    S3_INPUT_BUCKET_NAME: ${self:custom.inputBucketName}
+    S3_EXTRACTED_FILES_BUCKET_NAME: ${self:custom.extractedFilesBucketName}
