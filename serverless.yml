@@ -49,13 +49,7 @@ provider:
 
 functions:
   - ${file(functions/scan-file/function.yml)}
-  - ${file(workflows/scan-cv-workflow/copy-file/function.yml)}
-  - ${file(workflows/scan-cv-workflow/check-node-experience/function.yml)}
-  - ${file(workflows/scan-cv-workflow/check-it-experience/function.yml)}
-  - ${file(workflows/scan-cv-workflow/check-cloud-experience/function.yml)}
-  - ${file(workflows/scan-cv-workflow/check-exclude-lists/function.yml)}
-  - ${file(workflows/scan-cv-workflow/calculate-score/function.yml)}
-  - ${file(workflows/scan-cv-workflow/extract-text/function.yml)}
+  - ${file(workflows/scan-cv-workflow/example-lambda/function.yml)}
   # PLOP_ADD_LAMBDA
 
 stepFunctions:
@@ -79,16 +73,4 @@ resources:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: tsh-academy-serverless-workshops-input-bucket-${env:STUDENT_NAME, 'student1'}
-    extractedFilesBucket:
-      Type: AWS::S3::Bucket
-      Properties:
-        BucketName: tsh-academy-serverless-workshops-extracted-files-${env:STUDENT_NAME, 'student1'}
-    matchedFilesBucket:
-      Type: AWS::S3::Bucket
-      Properties:
-        BucketName: tsh-academy-serverless-workshops-matched-files-${env:STUDENT_NAME, 'student1'}
-    rejectedFilesBucket:
-      Type: AWS::S3::Bucket
-      Properties:
-        BucketName: tsh-academy-serverless-workshops-rejected-files-${env:STUDENT_NAME, 'student1'}
     ScanCvWorkflowStateMachineRole: ${file(workflows/scan-cv-workflow/workflow.iam.yml)}
