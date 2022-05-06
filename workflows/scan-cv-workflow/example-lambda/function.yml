@@ -1,0 +1,2 @@
+example-lambda:
+  handler: workflows/scan-cv-workflow/example-lambda/handler.handle
