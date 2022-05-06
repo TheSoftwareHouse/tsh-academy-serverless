@@ -1,8 +1,8 @@
 import { Context } from "aws-lambda";
 import S3 from "aws-sdk/clients/s3";
 import { ScanCvEvent } from "../types";
-import { createConfig } from "./config";
 import { winstonLogger as logger } from "../../../shared/logger";
+import { createConfig } from "./config";
 
 const s3Client = new S3();
 const config = createConfig(process.env);
