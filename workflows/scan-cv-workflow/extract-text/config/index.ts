@@ -1,7 +1,7 @@
 import Joi from "joi";
 import { pipeline } from "ts-pipe-compose";
 
-interface CopyFileLambdaEnvironmentVariables {
+interface ExtractTextLambdaEnvironmentVariables {
   inputBucketName: string;
   extractedFilesBucketName: string;
 }
@@ -11,7 +11,7 @@ const loadEnvs = (env: NodeJS.ProcessEnv) => ({
   extractedFilesBucketName: env.S3_EXTRACTED_FILES_BUCKET_NAME,
 });
 
-const validateConfig = (config: ReturnType<typeof loadEnvs>): CopyFileLambdaEnvironmentVariables => {
+const validateConfig = (config: ReturnType<typeof loadEnvs>): ExtractTextLambdaEnvironmentVariables => {
   const schema = Joi.object().keys({
     inputBucketName: Joi.string().required(),
     extractedFilesBucketName: Joi.string().required(),
