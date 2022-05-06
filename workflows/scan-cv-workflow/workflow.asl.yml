@@ -1,94 +1,9 @@
 Comment: "Scan user CV document for data"
-StartAt: checkFileType
+StartAt: exampleStep
 States:
-  checkFileType:
-    Type: Choice
-    Choices:
-      - Variable: $.extension
-        StringEquals: "txt"
-        Comment: Is a text file?
-        Next: copyFileToExtractedBucket
-    Default: extractData
-  extractData:
+  exampleStep:
     Type: Task
-    Resource: arn:aws:states:::aws-sdk:textract:analyzeDocument
-    Parameters:
-      Document:
-        S3Object:
-          Bucket: tsh-academy-serverless-workshops-input-bucket-${env:STUDENT_NAME, 'student01'}
-          Name.$: $.key
-      FeatureTypes:
-        - TABLES
-        - FORMS
-    ResultPath: "$.taskresult"
-    Next: extractText
-  extractText:
-    Type: Task
-    Resource: !GetAtt extractText-lambda.Arn
-    TimeoutSeconds: 28
-    Next: checkExperience
-  copyFileToExtractedBucket:
-    Type: Task
-    Resource: !GetAtt copyFile-lambda.Arn
-    TimeoutSeconds: 28
-    Next: checkExperience
-  checkExperience:
-    Type: Parallel
-    Branches:
-      - StartAt: checkNodeExperience
-        States:
-          checkNodeExperience:
-            Type: Task
-            Resource: !GetAtt checkNodeExperience-lambda.Arn
-            End: true
-      - StartAt: checkCloudExperience
-        States:
-          checkCloudExperience:
-            Type: Task
-            Resource: !GetAtt checkCloudExperience-lambda.Arn
-            End: true
-      - StartAt: checkItExperience
-        States:
-          checkItExperience:
-            Type: Task
-            Resource: !GetAtt checkItExperience-lambda.Arn
-            End: true
-      - StartAt: checkExcludeLists
-        States:
-          checkExcludeLists:
-            Type: Task
-            Resource: !GetAtt checkExcludeLists-lambda.Arn
-            End: true
-    Next: calculateScore
-  calculateScore:
-    Type: Task
-    Resource: !GetAtt calculateScore-lambda.Arn
-    TimeoutSeconds: 28
-    Next: checkScore
-  checkScore:
-    Type: Choice
-    Choices:
-      - Variable: $.calculatedScore
-        NumericGreaterThan: 100
-        Comment: Is a match?
-        Next: saveToMatchedBucket
-    Default: saveToRejectedBucket
-  saveToMatchedBucket:
-    Type: Task
-    Resource: arn:aws:states:::aws-sdk:s3:copyObject
-    Parameters:
-      Bucket.$: $.matchedFilesBucketName
-      CopySource.$: $.copySource
-      Key.$: $.key
-    TimeoutSeconds: 28
-    End: true
-  saveToRejectedBucket:
-    Type: Task
-    Resource: arn:aws:states:::aws-sdk:s3:copyObject
-    Parameters:
-      Bucket.$: $.rejectedFilesBucketName
-      CopySource.$: $.copySource
-      Key.$: $.key
+    Resource: !GetAtt example-lambda.Arn
     TimeoutSeconds: 28
     End: true
   # PLOP_ADD_WORKFLOW_STEP
