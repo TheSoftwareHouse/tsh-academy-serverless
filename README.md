@@ -29,13 +29,23 @@ To follow along with the presentation please make sure to have installed:
 - VS Code - https://code.visualstudio.com/
 - AWS Toolkit for VS Code - https://docs.aws.amazon.com/toolkit-for-vscode/latest/userguide/setup-toolkit.html
 
-### How to set up
-- copy `.env.dist` file to `.env` by running `cp .env.dist .env` and fill up variables
-- install dependencies by running `npm install`
-- configure default profile for executing AWS CLI commands by running `aws configure` and following along
-
 ### Code generation
 Our boilerplate supports code generation. Here is a command to execute: ```npm run plop```
+
+### How to set up
+- install dependencies by running `npm install`
+- after you've received a `credentials.csv` from us (if you haven't, scream out loud!) use its contents to:
+  - configure default profile for executing AWS CLI commands by running `aws configure` and entering the following it the prompt:
+    - AWS Access Key ID: `<the Access key ID>`
+    - AWS Secret Access Key: `<the "Secret access key">`
+    - Default region name: `eu-west-1`
+    - Default output format: the default `None` is fine, just press `Enter`
+  - set environment variables:
+    - run `cp .env.dist .env` 
+    - fill in `STUDENT_NAME`: `STUDENT_NAME=<the "User name" from the credentials file>`
+    - fill in `ACCOUNT_ID`: `ACCOUNT_ID=<the one provided by us (if we haven't, scream out loud!)>`
+- with the environment set up, you can proceed to [your first task](tasks/task-01.md)!
+
 
 ### **About us:**
 
