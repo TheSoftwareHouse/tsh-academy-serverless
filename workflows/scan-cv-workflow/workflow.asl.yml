@@ -1,6 +1,14 @@
-Comment: Scan user CV document for data
-StartAt: extractData
+Comment: "Scan user CV document for data"
+StartAt: checkFileType
 States:
+  checkFileType:
+    Type: Choice
+    Choices:
+      - Variable: $.extension
+        StringEquals: "txt"
+        Comment: Is a text file?
+        Next: copyFileToExtractedBucket
+    Default: extractData
   extractData:
     Type: Task
     Resource: 'arn:aws:states:::aws-sdk:textract:analyzeDocument'
@@ -14,5 +22,16 @@ States:
       FeatureTypes:
         - TABLES
         - FORMS
-    ResultPath: $.taskresult
+    ResultPath: "$.taskresult"
+    Next: extractText
+  extractText:
+    Type: Task
+    Resource: !GetAtt extractText-lambda.Arn
+    TimeoutSeconds: 28
     End: true
+  copyFileToExtractedBucket:
+    Type: Task
+    Resource: !GetAtt copyFile-lambda.Arn
+    TimeoutSeconds: 28
+    End: true
+  # PLOP_ADD_WORKFLOW_STEP
