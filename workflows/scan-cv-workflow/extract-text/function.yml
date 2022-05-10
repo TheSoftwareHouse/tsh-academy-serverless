@@ -1,0 +1,5 @@
+extractText-lambda:
+  handler: workflows/scan-cv-workflow/extract-text/handler.handle
+  environment:
+    S3_INPUT_BUCKET_NAME: tsh-academy-serverless-workshops-input-bucket-${env:STUDENT_NAME, 'student01'}
+    S3_EXTRACTED_FILES_BUCKET_NAME: tsh-academy-serverless-workshops-extracted-files-${env:STUDENT_NAME, 'student01'}
