@@ -1,10 +1,18 @@
 Comment: "Scan user CV document for data"
-StartAt: exampleStep
+StartAt: extractData
 States:
-  exampleStep:
+  extractData:
     Type: Task
-    Resource: !GetAtt example-lambda.Arn
-    TimeoutSeconds: 28
+    Resource: arn:aws:states:::aws-sdk:textract:analyzeDocument
+    Parameters:
+      Document:
+        S3Object:
+          Bucket: tsh-academy-serverless-workshops-input-bucket-${env:STUDENT_NAME, 'student01'}
+          Name.$: $.key
+      FeatureTypes:
+        - TABLES
+        - FORMS
+    ResultPath: "$.taskresult"
     End: true
   # PLOP_ADD_WORKFLOW_STEP
 

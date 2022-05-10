@@ -50,7 +50,8 @@ provider:
 
 functions:
   - ${file(functions/scan-file/function.yml)}
-  - ${file(workflows/scan-cv-workflow/example-lambda/function.yml)}
+  - ${file(workflows/scan-cv-workflow/copy-file/function.yml)}
+  - ${file(workflows/scan-cv-workflow/extract-text/function.yml)}
   # PLOP_ADD_LAMBDA
 
 stepFunctions:
@@ -74,4 +75,8 @@ resources:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: ${self:custom.inputBucketName}
+    extractedFilesBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: tsh-academy-serverless-workshops-extracted-files-${env:STUDENT_NAME, 'student1'}
     ScanCvWorkflowStateMachineRole: ${file(workflows/scan-cv-workflow/workflow.iam.yml)}
