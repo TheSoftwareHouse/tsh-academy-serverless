@@ -33,6 +33,7 @@ To follow along with the presentation please make sure to have installed:
 Our boilerplate supports code generation. Here is a command to execute: ```npm run plop```
 
 ### How to set up
+- checkout onto branch `task/1`: `git checkout task/1`
 - install dependencies by running `npm install`
 - after you've received a `credentials.csv` from us (if you haven't, scream out loud!) use its contents to:
   - configure default profile for executing AWS CLI commands by running `aws configure` and entering the following it the prompt:
@@ -44,7 +45,7 @@ Our boilerplate supports code generation. Here is a command to execute: ```npm r
     - run `cp .env.dist .env` 
     - fill in `STUDENT_NAME`: `STUDENT_NAME=<the "User name" from the credentials file>`
     - fill in `ACCOUNT_ID`: `ACCOUNT_ID=<the one provided by us (if we haven't, scream out loud!)>`
-- with the environment set up, you can proceed to [your first task](tasks/task-01.md)!
+- with the environment set up, you can proceed to [your first task](tasks/task-1.md)!
 
 
 ### **About us:**
