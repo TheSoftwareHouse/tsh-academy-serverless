@@ -83,4 +83,12 @@ resources:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: tsh-academy-serverless-workshops-extracted-files-${env:STUDENT_NAME, 'student1'}
+    matchedFilesBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: tsh-academy-serverless-workshops-matched-files-${env:STUDENT_NAME, 'student1'}
+    rejectedFilesBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: tsh-academy-serverless-workshops-rejected-files-${env:STUDENT_NAME, 'student1'}
     ScanCvWorkflowStateMachineRole: ${file(workflows/scan-cv-workflow/workflow.iam.yml)}

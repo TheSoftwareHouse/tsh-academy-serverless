@@ -5,6 +5,14 @@ import { createConfig } from "./config";
 
 const config = createConfig(process.env);
 
+function calculateScore(event: Required<ScanCvEvent>): number {
+  if (event.isExcluded) {
+    return 0;
+  }
+
+  return event.cloudExperience + event.nodeExperience + event.itExperience;
+}
+
 export const handle = async (event: ScanCvEvent[], _context: Context) => {
   logger.info(`Handling event: ${JSON.stringify(event)}`);
 
@@ -15,6 +23,15 @@ export const handle = async (event: ScanCvEvent[], _context: Context) => {
     };
   }, {} as any);
 
-  logger.info(`Score has been calculated for ${config.inputBucketName}/${singleEvent.key}`);
-  return event;
+  const scoreEvent: ScanCvScoreEvent = {
+    key: singleEvent.key,
+    extension: singleEvent.extension,
+    calculatedScore: calculateScore(singleEvent),
+    copySource: `${config.inputBucketName}/${singleEvent.key}`,
+    matchedFilesBucketName: config.matchedFilesBucketName,
+    rejectedFilesBucketName: config.rejectedFilesBucketName,
+  };
+
+  logger.info(`Score has been calculated for ${singleEvent.key}`);
+  return scoreEvent;
 };
