@@ -26,10 +26,43 @@ States:
     Type: Task
     Resource: !GetAtt extractText-lambda.Arn
     TimeoutSeconds: 28
-    End: true
+    Next: checkExperience
   copyFileToExtractedBucket:
     Type: Task
     Resource: !GetAtt copyFile-lambda.Arn
+    TimeoutSeconds: 28
+    Next: checkExperience
+  checkExperience:
+    Type: Parallel
+    Branches:
+      - StartAt: checkNodeExperience
+        States:
+          checkNodeExperience:
+            Type: Task
+            Resource: !GetAtt checkNodeExperience-lambda.Arn
+            End: true
+      - StartAt: checkCloudExperience
+        States:
+          checkCloudExperience:
+            Type: Task
+            Resource: !GetAtt checkCloudExperience-lambda.Arn
+            End: true
+      - StartAt: checkItExperience
+        States:
+          checkItExperience:
+            Type: Task
+            Resource: !GetAtt checkItExperience-lambda.Arn
+            End: true
+      - StartAt: checkExcludeLists
+        States:
+          checkExcludeLists:
+            Type: Task
+            Resource: !GetAtt checkExcludeLists-lambda.Arn
+            End: true
+    Next: calculateScore
+  calculateScore:
+    Type: Task
+    Resource: !GetAtt calculateScore-lambda.Arn
     TimeoutSeconds: 28
     End: true
   # PLOP_ADD_WORKFLOW_STEP
