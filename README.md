@@ -36,7 +36,7 @@ Our boilerplate supports code generation. Here is a command to execute: ```npm r
 - checkout onto branch `task/1`: `git checkout task/1`
 - install dependencies by running `npm install`
 - after you've received a `credentials.csv` from us (if you haven't, scream out loud!) use its contents to:
-  - configure default profile for executing AWS CLI commands by running `aws configure` and entering the following it the prompt:
+  - configure a new profile for executing AWS CLI commands by running `aws configure --profile tsh-workshops` and entering the following it the prompt:
     - AWS Access Key ID: `<the Access key ID>`
     - AWS Secret Access Key: `<the "Secret access key">`
     - Default region name: `eu-west-1`
@@ -45,6 +45,8 @@ Our boilerplate supports code generation. Here is a command to execute: ```npm r
     - run `cp .env.dist .env` 
     - fill in `STUDENT_NAME`: `STUDENT_NAME=<the "User name" from the credentials file>`
     - fill in `ACCOUNT_ID`: `ACCOUNT_ID=<the one provided by us (if we haven't, scream out loud!)>`
+  - deploy the whole application stack by running `npx sls deploy --aws-profile=tsh-workshops` .
+When deployed successfully, you will see the deployed step function in [AWS Console](https://eu-west-1.console.aws.amazon.com/states/home?region=eu-west-1#/statemachines) (look for one with your username in it).
 - with the environment set up, you can proceed to [your first task](tasks/task-1.md)!
 
 
