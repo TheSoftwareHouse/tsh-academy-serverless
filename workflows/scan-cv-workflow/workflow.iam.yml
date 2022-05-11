@@ -29,6 +29,16 @@ Properties:
             Resource:
               - arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-copyFile-lambda
               - arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-copyFile-lambda:*
+              - arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-checkNodeExperience-lambda
+              - arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-checkNodeExperience-lambda:*
+              - arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-checkCloudExperience-lambda
+              - arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-checkCloudExperience-lambda:*
+              - arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-checkItExperience-lambda
+              - arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-checkItExperience-lambda:*
+              - arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-checkExcludeLists-lambda
+              - arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-checkExcludeLists-lambda:*
+              - arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-calculateScore-lambda
+              - arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-calculateScore-lambda:*
               - arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-extractText-lambda
               - arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-extractText-lambda:*
             Effect: Allow
