@@ -5,13 +5,9 @@ Checkout onto branch `task/1` unless already there:
         
         git checkout task/1
 
-In the `serverless.yml` file there's a step function workflow defined, named `ScanCvWorkflow`. 
+In the `serverless.yml` file there's a step function workflow defined, named `ScanCvWorkflow`. You can start it manually by clicking `Start execution` in the [AWS Step Functions Console](https://eu-west-1.console.aws.amazon.com/states/home?region=eu-west-1#/statemachines)
 
 There is also a S3 bucket defined, named `inputBucket`
-
-You may deploy the whole application stack by running `npx sls deploy` .
-
-When deployed successfully, you will see the deployed step function in [AWS Console](https://eu-west-1.console.aws.amazon.com/states/home?region=eu-west-1#/statemachines). You can start it manually by clicking `Start execution`.
 
 ## Description
 What we want to achieve is that the workflow starts automatically as soon as a resume file is uploaded to the input S3 bucket.
@@ -51,7 +47,7 @@ Now we need you to add logic to it which will start the workflow execution:
 
 4.  Redeploy the stack by running:
    
-        npx sls deploy
+        npx sls deploy --aws-profile=tsh-workshops
 
 ## Result
 You may now upload one of the test files into your input AWS bucket (find the one containing your username in [S3 Console](https://s3.console.aws.amazon.com/s3/home?region=eu-west-1))
