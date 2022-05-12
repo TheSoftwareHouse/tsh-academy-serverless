@@ -3,7 +3,7 @@
 ## Where do we start?
 In the previous task, we implemented a lambda to calculate a score on top of the results from the parallel step.
 
-<img src="../data/task-4-result.png"/>
+<img src="../data/task-4-result.png" width="400"/>
 
 Checkout onto branch `task/5` unless already there:
         
@@ -33,7 +33,7 @@ To fill the Parameters property, use an event object to pass the data from the p
 You have the final workflow containing filtering CV files to the matched and rejected buckets.
 
 ## Graph
-<img src="../data/task-5-result.png"/>
+<img src="../data/task-5-result.png" width="400"/>
 
 ### Useful links
 - [AWS SDK service integrations](https://docs.aws.amazon.com/step-functions/latest/dg/supported-services-awssdk.html)
