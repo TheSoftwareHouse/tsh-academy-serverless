@@ -17,7 +17,7 @@ interface ExcludedPerson {
 const EXCLUDED_PEOPLE: ExcludedPerson[] = [{
   name: "janusz",
   surname: "kowalski",
-  city: "sosnowiec",
+  city: "chrząszczyżewoszyce",
 }];
 
 async function checkIfExcluded(text: string, excludedList: ExcludedPerson[]) {
