@@ -6,12 +6,3 @@ export interface ScanCvEvent {
   itExperience?: number;
   isExcluded?: boolean;
 }
-
-export interface ScanCvScoreEvent {
-  key: string;
-  extension: string;
-  calculatedScore: number;
-  matchedFilesBucketName: string;
-  rejectedFilesBucketName: string;
-  copySource: string;
-}
