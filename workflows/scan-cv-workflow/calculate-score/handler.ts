@@ -27,9 +27,7 @@ export const handle = async (event: ScanCvEvent[], _context: Context) => {
     key: singleEvent.key,
     extension: singleEvent.extension,
     calculatedScore: calculateScore(singleEvent),
-    copySource: `${config.inputBucketName}/${singleEvent.key}`,
-    matchedFilesBucketName: config.matchedFilesBucketName,
-    rejectedFilesBucketName: config.rejectedFilesBucketName,
+    copySource: `${config.inputBucketName}/${singleEvent.key}`
   };
 
   logger.info(`Score has been calculated for ${singleEvent.key}`);
