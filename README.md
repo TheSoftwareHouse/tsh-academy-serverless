@@ -14,8 +14,8 @@ stack. We're going to present some methods of development and how it differs fro
 ### Requirements:
 To follow along with the presentation please make sure to have installed:
 - brew
-- node.js
-- npm
+- node.js (>= 14.16.1, < 15.0.0)
+- npm (>= 6.14.12)
 - git
 - AWS CLI
 - AWS Toolkit
