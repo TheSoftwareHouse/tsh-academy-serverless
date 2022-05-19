@@ -16,10 +16,12 @@ export const handle = async (event: S3Event, _context: Context): Promise<any> =>
 
   if (["doc", "docx"].includes(extension!)) {
     winstonLogger.info(`Publishing failed file ${key} to topic ${config.scanFailedTopicArn}`);
-    await snsClient.publish({
-      Message: JSON.stringify({ key }),
-      TopicArn: config.scanFailedTopicArn,
-    });
+    await snsClient
+      .publish({
+        Message: JSON.stringify({ key }),
+        TopicArn: config.scanFailedTopicArn,
+      })
+      .promise();
 
     return;
   }
