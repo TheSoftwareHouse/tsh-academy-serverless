@@ -1,6 +1,6 @@
 # TSH Academy - Serverless Workshops
 Greetings!
-Welcome to TSH Academy workshops. This repository contains the code necessary for following along with presentation.
+Welcome to TSH Academy workshops. This repository contains the code necessary for following along with the presentation.
 If by any chance you get lost, we have prepared separate branches with every task, so you can verify your solution or start over.
 
 ## What you'll learn
@@ -29,9 +29,6 @@ To follow along with the presentation please make sure to have installed:
 - VS Code - https://code.visualstudio.com/
 - AWS Toolkit for VS Code - https://docs.aws.amazon.com/toolkit-for-vscode/latest/userguide/setup-toolkit.html
 
-### Code generation
-Our boilerplate supports code generation. Here is a command to execute: ```npm run plop```
-
 ### How to set up
 - checkout onto branch `task/1`: `git checkout task/1`
 - install dependencies by running `npm install`
@@ -44,10 +41,16 @@ Our boilerplate supports code generation. Here is a command to execute: ```npm r
   - set environment variables:
     - run `cp .env.dist .env` 
     - fill in `STUDENT_NAME`: `STUDENT_NAME=<the "User name" from the credentials file>`
-    - fill in `ACCOUNT_ID`: `ACCOUNT_ID=<the one provided by us (if we haven't, scream out loud!)>`
-  - deploy the whole application stack by running `npx sls deploy --aws-profile=tsh-workshops` .
-When deployed successfully, you will see the deployed step function in [AWS Console](https://eu-west-1.console.aws.amazon.com/states/home?region=eu-west-1#/statemachines) (look for one with your username in it).
-- with the environment set up, you can proceed to [your first task](tasks/task-1.md)!
+    - fill in `ACCOUNT_ID`: `ACCOUNT_ID=<the 12-digit number at the start of "Console login link" in the credentials file>`
+    - please, leave the other variables as they are, so we can easily identify your resources after you've deployed them on AWS :)
+  - deploy the whole application stack by running `npx sls deploy --aws-profile=tsh-workshops`.
+
+When deployed successfully, you will see the deployed step function in [AWS Console](https://eu-west-1.console.aws.amazon.com/states/home?region=eu-west-1#/statemachines):
+  * Log in, using the `User name` and `Password` we sent you. 
+  * You will then be asked to change your password upon your first login.
+  * In the list of AWS services, find Step Functions and look for one with your username in it.
+
+With the environment set up, you can proceed to [your first task](tasks/task-1.md)!
 
 
 ### **About us:**
