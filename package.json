@@ -13,9 +13,9 @@
   },
   "author": "TSH",
   "license": "ISC",
-  "engines" : { 
-    "npm" : ">=6.14.12",
-    "node" : ">=14.16.1"
+  "engines": {
+    "npm": ">=6.14.12",
+    "node": ">=14.16.1"
   },
   "devDependencies": {
     "@babel/core": "7.17.5",
