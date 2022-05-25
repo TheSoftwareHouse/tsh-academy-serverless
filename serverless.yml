@@ -21,6 +21,7 @@ custom:
     accountId: ${env:ACCOUNT_ID}
     region: us-east-1
   inputBucketName: tsh-academy-serverless-workshops-input-bucket-${env:STUDENT_NAME, 'student1'}
+  extractedFilesBucketName: tsh-academy-serverless-workshops-extracted-files-${env:STUDENT_NAME, 'student1'}
 provider:
   name: aws
   runtime: nodejs14.x
@@ -80,5 +81,5 @@ resources:
     extractedFilesBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: tsh-academy-serverless-workshops-extracted-files-${env:STUDENT_NAME, 'student1'}
+        BucketName: ${self:custom.extractedFilesBucketName}
     ScanCvWorkflowStateMachineRole: ${file(workflows/scan-cv-workflow/workflow.iam.yml)}
