@@ -28,7 +28,7 @@ S3_REJECTED_FILES_BUCKET_NAME: tsh-academy-serverless-workshops-rejected-files-$
 
 **Passsing parameters**
 
-To pass parameters to the native SDK integration from the workflow event, use the` $.` prefix inside the parameter value and the `.$` suffix inside the parameter name. Example:
+To pass parameters to the native SDK integration from the workflow event, use the `$.` prefix inside the parameter value and the `.$` suffix inside the parameter name. Example:
 
 ```yaml
 Parameters:
