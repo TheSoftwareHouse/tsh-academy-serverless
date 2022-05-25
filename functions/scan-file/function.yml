@@ -5,6 +5,6 @@ scan-file:
     STATE_MACHINE_ARN: ${self:resources.Outputs.ScanCvWorkflowStateMachine.Value}
   events:
     - s3:
-        bucket: tsh-academy-serverless-workshops-input-bucket-${env:STUDENT_NAME, 'student01'}
+        bucket: ${self:custom.inputBucketName}
         event: s3:ObjectCreated:*
         existing: true
