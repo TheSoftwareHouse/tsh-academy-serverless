@@ -22,8 +22,8 @@ In this exercise you are asked to store resume in different S3 buckets. One for 
 
 **Variables to be added in calculate score lambda definition**
 ```dotenv
-S3_MATCHED_FILES_BUCKET_NAME: tsh-academy-serverless-workshops-matched-files-${env:STUDENT_NAME, 'student01'}
-S3_REJECTED_FILES_BUCKET_NAME: tsh-academy-serverless-workshops-rejected-files-${env:STUDENT_NAME, 'student01'}
+S3_MATCHED_FILES_BUCKET_NAME: ${self:custom.matchedFilesBucketName}
+S3_REJECTED_FILES_BUCKET_NAME: ${self:custom.rejectedFilesBucketName}
 ```
 
 ## Result

@@ -15,7 +15,7 @@ States:
     Parameters:
       Document:
         S3Object:
-          Bucket: tsh-academy-serverless-workshops-input-bucket-${env:STUDENT_NAME, 'student01'}
+          Bucket: !Ref inputBucket
           Name.$: $.key
       FeatureTypes:
         - TABLES
