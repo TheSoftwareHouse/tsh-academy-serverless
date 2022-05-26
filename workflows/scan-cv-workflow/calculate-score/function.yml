@@ -1,6 +1,6 @@
 calculateScore-lambda:
   handler: workflows/scan-cv-workflow/calculate-score/handler.handle
   environment:
-    S3_INPUT_BUCKET_NAME: tsh-academy-serverless-workshops-input-bucket-${env:STUDENT_NAME, 'student01'}
-    S3_MATCHED_FILES_BUCKET_NAME: tsh-academy-serverless-workshops-matched-files-${env:STUDENT_NAME, 'student01'}
-    S3_REJECTED_FILES_BUCKET_NAME: tsh-academy-serverless-workshops-rejected-files-${env:STUDENT_NAME, 'student01'}
+    S3_INPUT_BUCKET_NAME: ${self:custom.inputBucketName}
+    S3_MATCHED_FILES_BUCKET_NAME: ${self:custom.matchedFilesBucketName}
+    S3_REJECTED_FILES_BUCKET_NAME: ${self:custom.rejectedFilesBucketName}
