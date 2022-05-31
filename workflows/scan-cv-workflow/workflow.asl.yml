@@ -34,6 +34,7 @@ States:
     Next: checkExperience
   checkExperience:
     Type: Parallel
+    End: true
     Branches:
       - StartAt: checkNodeExperience
         States:
@@ -59,10 +60,5 @@ States:
             Type: Task
             Resource: !GetAtt checkExcludeLists-lambda.Arn
             End: true
-    Next: calculateScore
-  calculateScore:
-    Type: Task
-    Resource: !GetAtt calculateScore-lambda.Arn
-    TimeoutSeconds: 28
-    End: true
+
   # PLOP_ADD_WORKFLOW_STEP
