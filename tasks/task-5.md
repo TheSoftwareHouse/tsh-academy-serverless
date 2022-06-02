@@ -6,34 +6,45 @@ In the previous task we have checked calculated total score of candidate resume.
 <img src="../data/task-4-result.png"/>
 
 ## Description
-In this exercise you are asked to store resume in different S3 buckets. One for accepted and one for rejected resumes.
+In this exercise you are asked to sort the resume files into two separate S3 buckets: one for accepted and one for rejected resumes.
 
-1. Add S3 bucket definition for `matchedFilesBucket` in `serverless.yml` file (use e.g. inputBucket as an example).
-2. Add S3 bucket definition for `rejectedFilesBucket` in `serverless.yml` file (use e.g. inputBucket as an example).
-3. Add new step `checkScore` in `workflow.asl.yml` file.
+1. Add two S3 bucket definitions in `serverless.yml` file (use e.g. inputBucket as an example):
+   1. `matchedFilesBucket`
+   2. `rejectedFilesBucket`
+2. Make sure you've stored the names of the buckets in `custom:` variables section in `serverless.yml` .
+3. Add a new step `checkScore` in `workflow.asl.yml` file.
    1. It should be `Choice` step.
-   2. It should save file to `matchedFilesBucket` when calculated score is greater than 100.
-   3. By default, it should save file to `rejectedFilesBucket`.
-4. Make sure steps uploading file have `End: True` to finalise workflow execution.
-5. Add ENV variable with `matchedBucket` name the `calculateScore` Lambda. It should be added in `function.yml`.
-6. Add ENV variable with `rejectedBucket` name the `calculateScore` Lambda. It should be added in `function.yml`.
-7. Fill `matchedFilesBucketName` and `rejectedFilesBucketName` in `calculateScore` Lambda.
-
-
-**Variables to be added in calculate score lambda definition**
-```dotenv
-S3_MATCHED_FILES_BUCKET_NAME: ${self:custom.matchedFilesBucketName}
-S3_REJECTED_FILES_BUCKET_NAME: ${self:custom.rejectedFilesBucketName}
-```
+   2. It should transition to a new step, `saveToMatchedBucket` when the calculated score is greater than `100`.
+   3. By default, it should transition to `saveToRejectedBucket`.
+4. Define the new steps, `saveToMatchedBucket` and `saveToRejectedBucket` in `workflow.asl.yml` file.
+   1. This time, the new steps are not going to call any lambdas - but [call native AWS S3 API](https://docs.aws.amazon.com/step-functions/latest/dg/supported-services-awssdk.html) instead.
+   2. In order to copy the resume file to one of the buckets, use the [`copyObject`](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#copyObject-property) method.
+   
 
 **Passsing parameters**
 
-To pass parameters to the native SDK integration from the workflow event, use the `$.` prefix inside the parameter value and the `.$` suffix inside the parameter name. Example:
+We're going to use two different ways of passing parameters to the native SDK integration:
+* static values: to pass a value stored in Serverless' `custom:` section, it's going to be simply referenced after the name of the API method's parameter. Example:
+```yaml
+Parameters:
+   ParameterFoo: ${self:custom.propertyFromCustomSection}
+```
+* dynamic values, to be resolved by Step Functions from the workflow event: use the `$.` prefix inside the parameter value and the `.$` suffix inside the parameter name. Example:
 
 ```yaml
 Parameters:
-   ParameterName.$: $.propertyFromEvent
+   ParameterBar.$: $.propertyFromEvent
 ```
+
+5. In order to call `copyObject`, you're going to need the following parameters:
+   1. `Bucket` - which is your destination bucket name (not ARN!) which you'll find in Serverless' `custom:` section.
+   2. `CopySource` - which you'll have to pass from `calculateScore` Lambda 
+      1. It's a concatenation of your input bucket name found in `config` and the object's `key`.
+      2. You will have to extend the `ScanCvScoreEvent` interface.
+   3. `Key` - which will be the new copied object's name. 
+      1. Again, pass this value from `calculateScore` Lambda and add it to the `ScanCvScoreEvent` interface.
+6. Make sure the new steps have `End: True` to finalise the workflow execution.
+
 ## Result
 You have successfully deployed 2 additional S3 buckets. Your workflow uploads resume into correct buckets based on the
 score.
