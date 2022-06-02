@@ -77,7 +77,7 @@ States:
     Type: Task
     Resource: arn:aws:states:::aws-sdk:s3:copyObject
     Parameters:
-      Bucket.$: $.matchedFilesBucketName
+      Bucket: ${self:custom.matchedFilesBucketName}
       CopySource.$: $.copySource
       Key.$: $.key
     TimeoutSeconds: 28
@@ -86,7 +86,7 @@ States:
     Type: Task
     Resource: arn:aws:states:::aws-sdk:s3:copyObject
     Parameters:
-      Bucket.$: $.rejectedFilesBucketName
+      Bucket: ${self:custom.rejectedFilesBucketName}
       CopySource.$: $.copySource
       Key.$: $.key
     TimeoutSeconds: 28
