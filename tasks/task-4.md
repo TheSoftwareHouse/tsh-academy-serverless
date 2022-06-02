@@ -21,10 +21,7 @@ In this exercise you are asked to calculate the total score of the resume based 
 **Pattern:**
 ```typescript
 {
-  key: string;
-  extension: string;
   calculatedScore: number;
-  copySource: string;
 }
 ```
 
