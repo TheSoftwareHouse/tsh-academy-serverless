@@ -8,8 +8,7 @@
     "format": "./node_modules/.bin/prettier --write ./shared/**/*.ts functions/**/*.ts",
     "lint": "./node_modules/.bin/eslint -c eslint.json --ext .ts functions/",
     "lint-fix": "./node_modules/.bin/eslint -c eslint.json --ext .ts --fix functions/",
-    "start-workflow": "aws stepfunctions --endpoint http://localhost:8083 start-execution --state-machine-arn arn:aws:states:us-east-1:101010101010:stateMachine:$npm_config_workflow",
-    "plop": "plop"
+    "start-workflow": "aws stepfunctions --endpoint http://localhost:8083 start-execution --state-machine-arn arn:aws:states:us-east-1:101010101010:stateMachine:$npm_config_workflow"
   },
   "author": "TSH",
   "license": "ISC",
@@ -45,7 +44,6 @@
     "eslint-plugin-unicorn": "^41.0.0",
     "inquirer-directory": "^2.2.0",
     "mocha": "^9.2.1",
-    "plop": "^3.0.5",
     "prettier": "^2.5.1",
     "serverless": "^3.3.0",
     "serverless-offline": "^8.5.0",

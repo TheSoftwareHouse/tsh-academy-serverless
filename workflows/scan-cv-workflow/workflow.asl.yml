@@ -6,6 +6,5 @@ States:
     Resource: !GetAtt example-lambda.Arn
     TimeoutSeconds: 28
     End: true
-  # PLOP_ADD_WORKFLOW_STEP
 
 
