@@ -91,6 +91,5 @@ States:
       Key.$: $.key
     TimeoutSeconds: 28
     End: true
-  # PLOP_ADD_WORKFLOW_STEP
 
 

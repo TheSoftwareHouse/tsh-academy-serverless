@@ -1,2 +1,0 @@
-{{name}}-lambda:
-  handler: workflows/{{workflow}}/{{name}}/handler.handle

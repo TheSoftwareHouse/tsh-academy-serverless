@@ -60,12 +60,10 @@ functions:
   - ${file(workflows/scan-cv-workflow/check-exclude-lists/function.yml)}
   - ${file(workflows/scan-cv-workflow/calculate-score/function.yml)}
   - ${file(workflows/scan-cv-workflow/extract-text/function.yml)}
-  # PLOP_ADD_LAMBDA
 
 stepFunctions:
   stateMachines:
     ScanCvWorkflow: ${file(workflows/scan-cv-workflow/workflow.yml)}
-  # PLOP_ADD_WORKFLOW_STATE_MACHINE
 
 resources:
   Outputs:
@@ -73,7 +71,6 @@ resources:
       Description: Scan CV workflow state machine Arn
       Value:
         Ref: ScanCvWorkflow${self:service}${opt:stage, 'dev'}
-    # PLOP_ADD_WORKFLOW_RESOURCE
   Resources:
     scanSnsTopic:
       Type: AWS::SNS::Topic
