@@ -12,7 +12,7 @@ package:
 
 custom:
   accountId: ${env:ACCOUNT_ID}
-  studentId: ${env:STUDENT_NAME, 'student01'}
+  studentId: ${env:STUDENT_NAME, 'student00'}
   logRetentionInDays: 30
   webpack:
     webpackConfig: "webpack.config.js"
@@ -20,7 +20,7 @@ custom:
   stepFunctionsLocal:
     accountId: ${env:ACCOUNT_ID}
     region: us-east-1
-  inputBucketName: tsh-academy-serverless-workshops-input-bucket-${env:STUDENT_NAME, 'student1'}
+  inputBucketName: tsh-academy-serverless-workshops-input-bucket-${env:STUDENT_NAME, 'student00'}
 provider:
   name: aws
   runtime: nodejs14.x
@@ -31,7 +31,7 @@ provider:
   environment:
     APP_NAME: ${env:APP_NAME, 'tshAcademySlsWorkshops'}
     AWS_LAMBDAS_REGION: ${env:AWS_LAMBDAS_REGION, 'eu-west-1'}
-    STUDENT_NAME: ${env:STUDENT_NAME, 'student01'}
+    STUDENT_NAME: ${env:STUDENT_NAME, 'student00'}
   iamRoleStatements:
     - Effect: Allow
       Action:
