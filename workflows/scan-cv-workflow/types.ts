@@ -6,3 +6,7 @@ export interface ScanCvEvent {
   itExperience?: number;
   isExcluded?: boolean;
 }
+
+export interface ScanCvScoreEvent {
+  calculatedScore: number;
+}
