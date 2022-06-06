@@ -46,7 +46,7 @@ exampleParallelStep:
             End: true
 ```
 5. Add necessary log entries and verify if workflow succeeds on test files.
-6. Did something wrong happened during a deploy? How do you think, what's the issue? How it can be fixed?
+6. Did something wrong happened during a deploy? How do you think, what's the issue? How can it be fixed?
 7. After adding the fix rerun the deploy and check that workflow succeeds with test files.
 
 ## Result
