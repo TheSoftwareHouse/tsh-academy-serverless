@@ -20,9 +20,13 @@ Try yourself what the lambda's input arguments are when it gets invoked this way
 4. In [CloudWatch logs](https://eu-west-1.console.aws.amazon.com/cloudwatch), see the logged output.
 
 On top of that, `serverless.yml` also declares a step function workflow, named `ScanCvWorkflow`. Its definition is held in another file, `workflows/scan-cv-workflow/workflow.asl.yml` . There's only one step in it, which invokes an example Lambda function.
-* see how the Lambda is referenced by calling [`GetAtt`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-getatt.html) Cloud Formation function
-* it references the Lambda function by its name, as it's defined in `workflows/scan-cv-workflow/example-lambda/function.yml`. 
-* you can start the workflow manually by clicking `Start execution` in the [AWS Step Functions Console](https://eu-west-1.console.aws.amazon.com/states/home?region=eu-west-1#/statemachines)
+
+<img src="../data/task-1-result.png"/>
+
+* See how the Lambda function is referenced by its name, as it's defined in `workflows/scan-cv-workflow/example-lambda/function.yml`. 
+* See how [`GetAtt`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-getatt.html) Cloud Formation function is called to access the Lambda's [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) and provide it to the step definition.
+* Note that "Start" and "End" are not states per se, and you don't define them in the `workflow.asl.yml` file.
+* You can try out the workflow manually by clicking `Start execution` in the [AWS Step Functions Console](https://eu-west-1.console.aws.amazon.com/states/home?region=eu-west-1#/statemachines).
 
 ## Description
 What we want to achieve is that the workflow starts automatically as soon as a resume file is uploaded to the input S3 bucket.
