@@ -1,7 +1,7 @@
 import Joi from "joi";
 import { pipeline } from "ts-pipe-compose";
 
-interface CheckCloudExperienceLambdaEnvironmentVariables {
+export interface CheckCloudExperienceLambdaEnvironmentVariables {
   extractedFilesBucketName: string;
 }
 
