@@ -32,7 +32,7 @@ To follow along with the presentation please make sure to have installed:
 ### How to set up
 - checkout onto branch `task/1`: `git checkout task/1`
 - install dependencies by running `npm install`
-- after you've received a `credentials.csv` from us (if you haven't, scream out loud!) use its contents to:
+- after you've received a `studentXX.csv` from us (if you haven't, scream out loud!) use its contents to:
   - configure a new profile for executing AWS CLI commands by running `aws configure --profile tsh-workshops` and entering the following it the prompt:
     - AWS Access Key ID: `<the Access key ID>`
     - AWS Secret Access Key: `<the "Secret access key">`
