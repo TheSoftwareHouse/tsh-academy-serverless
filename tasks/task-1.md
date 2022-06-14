@@ -44,7 +44,7 @@ We need you to add logic to `scan-file` lambda which will start the workflow exe
 
 * as the execution's `input`, pass the uploaded file's path
 * `name` should be a unique identifier for each execution - you might use the filename followed by a uuid
-* `stateMachineArn` has already been provided as an env variablee - see the `config` object
+* `stateMachineArn` has already been provided as an env variable - see the `config` object
 * by the way, SDK methods have the utility method `.promise()` for use with async/await :)
 
 4.  Redeploy the stack by running:
