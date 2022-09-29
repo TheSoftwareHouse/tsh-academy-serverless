@@ -55,6 +55,7 @@ score.
 ### Useful links
 - [Choice step](https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-choice-state.html)
 - [Native integration with AWS API](https://docs.aws.amazon.com/step-functions/latest/dg/supported-services-awssdk.html)
+- [Introduction to using native AWS integrations](https://aws.amazon.com/blogs/aws/now-aws-step-functions-supports-200-aws-services-to-enable-easier-workflow-automation/)
 - [ENV variables](https://www.serverless.com/framework/docs/providers/aws/guide/variables#referencing-environment-variables)
 
 
